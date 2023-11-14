@@ -30,7 +30,7 @@ export interface DarkModeSelectors {
   dark?: string
 }
 
-export interface PresetMiniOptions extends PresetOptions {
+export interface PresetMpOptions extends PresetOptions {
   /**
    * Dark mode options
    *
@@ -72,7 +72,7 @@ export interface PresetMiniOptions extends PresetOptions {
   arbitraryVariants?: boolean
 }
 
-export const presetMini = definePreset((options: PresetMiniOptions = {}) => {
+export const presetMp = definePreset((options: PresetMpOptions = {}) => {
   options.dark = options.dark ?? 'class'
   options.attributifyPseudo = options.attributifyPseudo ?? false
   options.preflight = options.preflight ?? true
@@ -97,7 +97,7 @@ export const presetMini = definePreset((options: PresetMiniOptions = {}) => {
   }
 })
 
-export default presetMini
+export default presetMp
 
 function postprocessor(prefix: string): Postprocessor {
   const varPrefix = VarPrefixPostprocessor(prefix)
