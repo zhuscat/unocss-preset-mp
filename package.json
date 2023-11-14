@@ -1,0 +1,17 @@
+{
+  "name": "unocss-preset-uniapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "zhuscat",
+  "license": "ISC",
+  "dependencies": {
+    "@unocss/core": "^0.57.3",
+    "@unocss/extractor-arbitrary-variants": "^0.57.3",
+    "@unocss/rule-utils": "^0.57.3"
+  }
+}

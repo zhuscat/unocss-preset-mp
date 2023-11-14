@@ -1,0 +1,47 @@
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  '@unocss/core':
+    specifier: ^0.57.3
+    version: 0.57.3
+  '@unocss/extractor-arbitrary-variants':
+    specifier: ^0.57.3
+    version: 0.57.3
+  '@unocss/rule-utils':
+    specifier: ^0.57.3
+    version: 0.57.3
+
+packages:
+
+  /@jridgewell/sourcemap-codec@1.4.15:
+    resolution: {integrity: sha512-eF2rxCRulEKXHTRiDrDy6erMYWqNw4LPdQ8UQA4huuxaQsVeRPFl2oM8oDGxMFhJUWZf9McpLtJasDDZb/Bpeg==}
+    dev: false
+
+  /@unocss/core@0.57.3:
+    resolution: {integrity: sha512-o6snDo5vwAenIqA+wjjI6BUsftJXXSqrPHYqplb+QX5bLfxW/OU1xhBRlnhiP0BOGGZXqgGEETU1ym8MM9bLwA==}
+    dev: false
+
+  /@unocss/extractor-arbitrary-variants@0.57.3:
+    resolution: {integrity: sha512-OmF+2TjJ97i7KOCR8wPgZK/pkp8Rcfo4tzqT/4jBUIi7rfDGZx/eE3aZKFpZSZlUuTH5cdReaKxymXQmJ4dibA==}
+    dependencies:
+      '@unocss/core': 0.57.3
+    dev: false
+
+  /@unocss/rule-utils@0.57.3:
+    resolution: {integrity: sha512-koWXeRJHFt/SJdb3m7s/2+NrBCcUtl67SX7rSHJc99Z+dwZgIsPUfdfRKM4mZD43MayybvDrd1Wue2LNQg5R/g==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@unocss/core': 0.57.3
+      magic-string: 0.30.5
+    dev: false
+
+  /magic-string@0.30.5:
+    resolution: {integrity: sha512-7xlpfBaQaP/T6Vh8MO/EqXSW5En6INHEvEXQiuff7Gku0PWjU3uf6w/j9o7O+SpB5fOAkrI5HeoNgwjEO0pFsA==}
+    engines: {node: '>=12'}
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.4.15
+    dev: false
