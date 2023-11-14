@@ -1,6 +1,6 @@
 import type { VariantObject } from '@unocss/core'
 import { escapeRegExp, escapeSelector, warnOnce } from '@unocss/core'
-import type { PresetMiniOptions } from '..'
+import type { PresetMpOptions } from '..'
 import { getBracket, h, variantGetBracket } from '../_utils'
 
 /**
@@ -290,7 +290,7 @@ export function variantPseudoClassFunctions(): VariantObject {
   }
 }
 
-export function variantTaggedPseudoClasses(options: PresetMiniOptions = {}): VariantObject[] {
+export function variantTaggedPseudoClasses(options: PresetMpOptions = {}): VariantObject[] {
   const attributify = !!options?.attributifyPseudo
 
   return [

@@ -1,8 +1,8 @@
 import type { Variant } from '@unocss/core'
-import type { PresetMiniOptions } from '..'
+import type { PresetMpOptions } from '..'
 import { variantMatcher, variantParentMatcher } from '../utils'
 
-export function variantColorsMediaOrClass(options: PresetMiniOptions = {}): Variant[] {
+export function variantColorsMediaOrClass(options: PresetMpOptions = {}): Variant[] {
   if (options?.dark === 'class' || typeof options.dark === 'object') {
     const { dark = '.dark', light = '.light' } = typeof options.dark === 'string'
       ? {}

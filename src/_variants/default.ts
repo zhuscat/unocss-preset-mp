@@ -1,5 +1,5 @@
 import type { Variant } from '@unocss/core'
-import type { PresetMiniOptions } from '..'
+import type { PresetMpOptions } from '..'
 import type { Theme } from '../theme'
 import { variantCombinators } from './combinators'
 import { variantColorsMediaOrClass } from './dark'
@@ -11,7 +11,7 @@ import { variantSupports } from './supports'
 import { variantPartClasses, variantPseudoClassFunctions, variantPseudoClassesAndElements, variantTaggedPseudoClasses } from './pseudo'
 import { variantContainerQuery } from './container'
 
-export function variants(options: PresetMiniOptions): Variant<Theme>[] {
+export function variants(options: PresetMpOptions): Variant<Theme>[] {
   return [
     variantCssLayer,
     variantSelector,
