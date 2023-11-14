@@ -1,10 +1,18 @@
 {
-  "name": "unocss-preset-uniapp",
+  "name": "unocss-preset-mp",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "*.css",
+    "*.d.ts",
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "unbuild",
+    "stub": "unbuild --stub"
   },
   "keywords": [],
   "author": "zhuscat",
@@ -13,5 +21,14 @@
     "@unocss/core": "^0.57.3",
     "@unocss/extractor-arbitrary-variants": "^0.57.3",
     "@unocss/rule-utils": "^0.57.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.9.0",
+    "bun-types": "latest",
+    "std-env": "^3.5.0",
+    "unbuild": "^2.0.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
   }
 }

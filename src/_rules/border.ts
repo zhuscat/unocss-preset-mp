@@ -28,11 +28,11 @@ export const borders: Rule[] = [
   [/^(?:border|b)-([bi][se])-(?:color-)?(.+)$/, handlerBorderColor],
 
   // opacity
-  [/^(?:border|b)-()op(?:acity)?-?(.+)$/, handlerBorderOpacity, { autocomplete: '(border|b)-(op|opacity)-<percent>' }],
-  [/^(?:border|b)-([xy])-op(?:acity)?-?(.+)$/, handlerBorderOpacity],
-  [/^(?:border|b)-([rltbse])-op(?:acity)?-?(.+)$/, handlerBorderOpacity],
-  [/^(?:border|b)-(block|inline)-op(?:acity)?-?(.+)$/, handlerBorderOpacity],
-  [/^(?:border|b)-([bi][se])-op(?:acity)?-?(.+)$/, handlerBorderOpacity],
+  [/^(?:border|b)-()op(.+)$/, handlerBorderOpacity, { autocomplete: '(border|b)-op<percent>' }],
+  [/^(?:border|b)-([xy])-op(.+)$/, handlerBorderOpacity],
+  [/^(?:border|b)-([rltbse])-op(.+)$/, handlerBorderOpacity],
+  [/^(?:border|b)-(block|inline)-op(.+)$/, handlerBorderOpacity],
+  [/^(?:border|b)-([bi][se])-op(.+)$/, handlerBorderOpacity],
 
   // radius
   [/^(?:border-|b-)?(?:rounded|rd)()(?:-(.+))?$/, handlerRounded, { autocomplete: ['(border|b)-(rounded|rd)', '(border|b)-(rounded|rd)-<num>', '(rounded|rd)', '(rounded|rd)-<num>'] }],

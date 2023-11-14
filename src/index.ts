@@ -84,7 +84,7 @@ export const presetMini = definePreset((options: PresetMiniOptions = {}) => {
     variants: variants(options),
     options,
     prefix: options.prefix,
-    postprocess: VarPrefixPostprocessor(options.variablePrefix),
+    postprocess: postprocessor(options.variablePrefix),
     preflights: options.preflight
       ? normalizePreflights(preflights, options.variablePrefix)
       : [],
@@ -99,6 +99,17 @@ export const presetMini = definePreset((options: PresetMiniOptions = {}) => {
 
 export default presetMini
 
+function postprocessor(prefix: string): Postprocessor {
+  const varPrefix = VarPrefixPostprocessor(prefix)
+  const remToRpx = RemToRpxPostprocessor()
+  return (obj) => {
+    if (varPrefix) {
+      varPrefix(obj)
+    }
+    remToRpx(obj)
+  }
+}
+
 export function VarPrefixPostprocessor(prefix: string): Postprocessor | undefined {
   if (prefix !== 'un-') {
     return (obj) => {
@@ -108,6 +119,18 @@ export function VarPrefixPostprocessor(prefix: string): Postprocessor | undefine
           i[1] = i[1].replace(/var\(--un-/g, `var(--${prefix}`)
       })
     }
+  }
+}
+
+const remRE = /(-?[.\d]+)rem/g
+
+export function RemToRpxPostprocessor(): Postprocessor {
+  return (obj) => {
+    obj.entries.forEach((i) => {
+      const value = i[1]
+      if (typeof value === 'string' && remRE.test(value))
+        i[1] = value.replace(remRE, (_, p1) => `${p1 * 8}rpx`)
+    })
   }
 }
 
