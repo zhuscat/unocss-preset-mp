@@ -5,6 +5,7 @@ import type { Theme } from '../theme'
 import { h } from './handlers'
 import { cssMathFnRE, directionMap, globalKeywords } from './mappings'
 import { numberWithUnitRE } from './handlers/regex'
+import { escapeSelector } from '@unocss/core'
 
 export const CONTROL_MINI_NO_NEGATIVE = '$$mini-no-negative'
 
@@ -47,21 +48,11 @@ function getThemeColor(theme: Theme, colors: string[]) {
   return obj
 }
 
-/**
- * Split utility shorthand delimited by / or :
- */
-export function splitShorthand(body: string, type: string) {
-  const split = body.split(/(?:\/|:)/)
-
-  if (split[0] === `[${type}`) {
-    return [
-      split.slice(0, 2).join(':'),
-      split[2],
-    ]
-  }
-
-  return split
+function varPrefixCssVar(str: string) {
+  if (str.match(/^var-[^\s'"`;{}]/))
+    return `var(--${escapeSelector(str.slice(4))})`
 }
+
 
 /**
  * Parse color string into {@link ParsedColorValue} (if possible). Color value will first be matched to theme object before parsing.
@@ -78,31 +69,23 @@ export function splitShorthand(body: string, type: string) {
  * @return object if string is parseable.
  */
 export function parseColor(body: string, theme: Theme): ParsedColorValue | undefined {
-  const [main, opacity] = splitShorthand(body, 'color')
+  const main = body
 
-  const colors = main
-    .replace(/([a-z])([0-9])/g, '$1-$2')
-    .split(/-/g)
+  const colors = main.replace(/([a-z])([0-9])/g, '$1-$2').split(/-/g)
   const [name] = colors
 
   if (!name)
     return
 
   let color: string | undefined
-  const bracket = h.bracketOfColor(main)
-  const bracketOrMain = bracket || main
 
-  if (h.numberWithUnit(bracketOrMain))
+  if (h.numberWithUnit(main))
     return
-
-  if (bracketOrMain.match(/^#[\da-fA-F]+/g))
-    color = bracketOrMain
-  else if (bracketOrMain.match(/^hex-[\da-fA-F]+/g))
-    color = `#${bracketOrMain.slice(4)}`
-  else if (main.startsWith('$'))
-    color = h.cssvar(main)
-
-  color = color || bracket
+  
+  if (main.match(/^hex-[\da-fA-F]+/g))
+    color = `#${main.slice(4)}`
+  else if (main.startsWith('var-'))
+    color = varPrefixCssVar(main)
 
   if (!color) {
     const colorData = getThemeColor(theme, [main])
@@ -136,12 +119,12 @@ export function parseColor(body: string, theme: Theme): ParsedColorValue | undef
   }
 
   return {
-    opacity,
+    opacity: '',
     name,
     no,
     color,
     cssColor: parseCssColor(color),
-    alpha: h.bracket.cssvar.percent(opacity ?? ''),
+    alpha: h.bracket.cssvar.percent(''),
   }
 }
 

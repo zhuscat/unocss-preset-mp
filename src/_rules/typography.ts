@@ -1,7 +1,7 @@
 import type { CSSObject, Rule } from '@unocss/core'
 import { toArray } from '@unocss/core'
 import type { Theme } from '../theme'
-import { colorResolver, colorableShadows, h, splitShorthand } from '../utils'
+import { colorResolver, colorableShadows, h } from '../utils'
 
 function handleThemeByKey(s: string, theme: Theme, key: 'lineHeight' | 'letterSpacing') {
   return theme[key]?.[s] || h.bracket.cssvar.global.rem(s)
@@ -12,9 +12,8 @@ export const fonts: Rule<Theme>[] = [
   [
     /^text-(.+)$/,
     ([, s = 'base'], { theme }) => {
-      const [size, leading] = splitShorthand(s, 'length')
+      const size = s
       const sizePairs = toArray(theme.fontSize?.[size]) as [string, string | CSSObject, string?]
-      const lineHeight = leading ? handleThemeByKey(leading, theme, 'lineHeight') : undefined
 
       if (sizePairs?.[0]) {
         const [fontSize, height, letterSpacing] = sizePairs
@@ -26,16 +25,8 @@ export const fonts: Rule<Theme>[] = [
         }
         return {
           'font-size': fontSize,
-          'line-height': lineHeight ?? height ?? '1',
+          'line-height': '1',
           'letter-spacing': letterSpacing ? handleThemeByKey(letterSpacing, theme, 'letterSpacing') : undefined,
-        }
-      }
-
-      const fontSize = h.bracketOfLength.rem(size)
-      if (lineHeight && fontSize) {
-        return {
-          'font-size': fontSize,
-          'line-height': lineHeight,
         }
       }
 

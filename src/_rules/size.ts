@@ -63,7 +63,7 @@ function handleBreakpoint(context: Readonly<RuleContext<Theme>>, point: string, 
 }
 
 function getAspectRatio(prop: string) {
-  if (/^\d+\/\d+$/.test(prop))
+  if (/^\d+-\d+$/.test(prop))
     return prop
 
   switch (prop) {
