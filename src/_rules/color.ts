@@ -5,7 +5,7 @@ import { colorResolver, globalKeywords, h, isSize } from '../utils'
  * @example op10
  */
 export const opacity: Rule[] = [
-  [/^op(.+)$/, ([, d]) => ({ opacity: h.bracket.percent.cssvar(d) })],
+  [/^op-?(.+)$/, ([, d]) => ({ opacity: h.bracket.percent.cssvar(d) })],
 ]
 
 /**
@@ -15,12 +15,12 @@ export const textColors: Rule[] = [
   [/^(?:c)-(.+)$/, colorResolver('color', 'text'), { autocomplete: 'c-$colors' }],
   // auto detection and fallback to font-size if the content looks like a size
   [/^(?:c)-(.+)$/, ([, v]) => globalKeywords.includes(v) ? { color: v } : undefined, { autocomplete: `(c)-(${globalKeywords.join('|')})` }],
-  [/^(?:c)-op(.+)$/, ([, opacity]) => ({ '--un-text-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: '(c)-op<percent>' }],
+  [/^(?:c)-op-?(.+)$/, ([, opacity]) => ({ '--un-text-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: '(c)-op-<percent>' }],
 ]
 
 export const bgColors: Rule[] = [
   [/^bg-(.+)$/, (...args) => isSize(args[0][1]) ? undefined : colorResolver('background-color', 'bg')(...args), { autocomplete: 'bg-$colors' }],
-  [/^bg-op(.+)$/, ([, opacity]) => ({ '--un-bg-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'bg-op<percent>' }],
+  [/^bg-op-?(.+)$/, ([, opacity]) => ({ '--un-bg-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'bg-op-<percent>' }],
 ]
 
 export const colorScheme: Rule[] = [

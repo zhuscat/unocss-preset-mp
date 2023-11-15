@@ -21,7 +21,7 @@ export const textDecorations: Rule<Theme>[] = [
       }
     }
   }, { autocomplete: '(underline|decoration)-$colors' }],
-  [/^(?:underline|decoration)-op(.+)$/, ([, opacity]) => ({ '--un-line-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: '(underline|decoration)-op<percent>' }],
+  [/^(?:underline|decoration)-op-?(.+)$/, ([, opacity]) => ({ '--un-line-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: '(underline|decoration)-op-<percent>' }],
 
   // offset
   [/^(?:underline|decoration)-offset-(.+)$/, ([, s], { theme }) => ({ 'text-underline-offset': theme.lineWidth?.[s] ?? h.auto.bracket.cssvar.global.px(s) }), { autocomplete: '(underline|decoration)-(offset)-<num>' }],

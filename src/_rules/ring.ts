@@ -33,11 +33,11 @@ export const rings: Rule<Theme>[] = [
 
   // colors
   [/^ring-(.+)$/, colorResolver('--un-ring-color', 'ring'), { autocomplete: 'ring-$colors' }],
-  [/^ring-op?(.+)$/, ([, opacity]) => ({ '--un-ring-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'ring-op<percent>' }],
+  [/^ring-op?(.+)$/, ([, opacity]) => ({ '--un-ring-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'ring-op-<percent>' }],
 
   // offset color
   [/^ring-offset-(.+)$/, colorResolver('--un-ring-offset-color', 'ring-offset'), { autocomplete: 'ring-offset-$colors' }],
-  [/^ring-offset-op(.+)$/, ([, opacity]) => ({ '--un-ring-offset-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'ring-offset-op<percent>' }],
+  [/^ring-offset-op-?(.+)$/, ([, opacity]) => ({ '--un-ring-offset-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'ring-offset-op-<percent>' }],
 
   // style
   ['ring-inset', { '--un-ring-inset': 'inset' }],
