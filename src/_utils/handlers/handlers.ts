@@ -94,7 +94,7 @@ export function rem(str: string) {
   if (!Number.isNaN(num)) {
     if (num === 0)
       return '0'
-    return unit ? `${round(num)}${unit}` : `${round(num / 4)}rem`
+    return unit ? `${round(num)}${unit === 'pct' ? '%' : unit}` : `${round(num / 4)}rem`
   }
 }
 
@@ -119,8 +119,8 @@ export function number(str: string) {
 }
 
 export function percent(str: string) {
-  if (str.endsWith('%'))
-    str = str.slice(0, -1)
+  if (str.endsWith('pct'))
+    str = str.slice(0, -3)
   if (!numberRE.test(str))
     return
   const num = Number.parseFloat(str)
@@ -131,7 +131,8 @@ export function percent(str: string) {
 export function fraction(str: string) {
   if (str === 'full')
     return '100%'
-  const [left, right] = str.split('/')
+  // modify 1/2 -> 1to2
+  const [left, right] = str.split('to')
   const num = Number.parseFloat(left) / Number.parseFloat(right)
   if (!Number.isNaN(num)) {
     if (num === 0)
