@@ -37,7 +37,6 @@ export const paddings: Rule[] = [
           ]
         })
       }
-      return [['color', 'blue']]
     },
     { autocomplete: '(m|p)<directions>-safe-<num>' },
   ],
