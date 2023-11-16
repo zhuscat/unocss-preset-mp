@@ -70,6 +70,8 @@ export interface PresetMpOptions extends PresetOptions {
    * @default true
    */
   arbitraryVariants?: boolean
+
+  unit?: 'rpx' | 'vw'
 }
 
 export const presetMp = definePreset((options: PresetMpOptions = {}) => {
@@ -84,7 +86,7 @@ export const presetMp = definePreset((options: PresetMpOptions = {}) => {
     variants: variants(options),
     options,
     prefix: options.prefix,
-    postprocess: postprocessor(options.variablePrefix),
+    postprocess: postprocessor(options.variablePrefix, options.unit ?? 'rpx'),
     preflights: options.preflight
       ? normalizePreflights(preflights, options.variablePrefix)
       : [],
@@ -99,14 +101,14 @@ export const presetMp = definePreset((options: PresetMpOptions = {}) => {
 
 export default presetMp
 
-function postprocessor(prefix: string): Postprocessor {
+function postprocessor(prefix: string, unit: 'vw' | 'rpx'): Postprocessor {
   const varPrefix = VarPrefixPostprocessor(prefix)
-  const remToRpx = RemToRpxPostprocessor()
+  const unitTransform = unit === 'rpx' ? RemToRpxPostprocessor() : RemToVwPostprocessor()
   return (obj) => {
     if (varPrefix) {
       varPrefix(obj)
     }
-    remToRpx(obj)
+    unitTransform(obj)
   }
 }
 
@@ -130,6 +132,19 @@ export function RemToRpxPostprocessor(): Postprocessor {
       const value = i[1]
       if (typeof value === 'string' && remRE.test(value))
         i[1] = value.replace(remRE, (_, p1) => `${p1 * 8}rpx`)
+    })
+  }
+}
+
+export function RemToVwPostprocessor(): Postprocessor {
+  function round(n: number) {
+    return n.toFixed(10).replace(/\.0+$/, '').replace(/(\.\d+?)0+$/, '$1')
+  }
+  return (obj) => {
+    obj.entries.forEach((i) => {
+      const value = i[1]
+      if (typeof value === 'string' && remRE.test(value))
+        i[1] = value.replace(remRE, (_, p1) => `${round(p1 * 100 / 375)}vw`)
     })
   }
 }

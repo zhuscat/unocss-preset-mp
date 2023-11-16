@@ -2,7 +2,7 @@
 
 👷
 
-基于 `@unocss/preset-mini` 改写的，适用于小程序的预设
+基于 `@unocss/preset-mini` 改写的，适用于小程序的预设，也可用于专门用于移动端的页面
 
 1. 与 [unocss-preset-weapp](https://github.com/MellowCo/unocss-preset-weapp) 不同，这个预设期望所有规则不会有微信小程序中不允许的特殊字符，这样我们就不需要去 transform 项目中的类名
 2. 这个预设尽量是作为 `@unocss/preset-mini` 的子集，尽量不做不兼容的更改，对于 alias，因为小程序体积限制较多，尽量只保留短的那一个
