@@ -25,19 +25,19 @@ export const rings: Rule<Theme>[] = [
       }
     }
   }, { autocomplete: 'ring-$ringWidth' }],
-  [/^ring-(?:width-|size-)(.+)$/, ([, d], { theme }) => ({ '--un-ring-width': theme.lineWidth?.[d] ?? h.bracket.cssvar.px(d) }), { autocomplete: 'ring-(width|size)-$lineWidth' }],
+  [/^ring-(?:width-|size-)(.+)$/, ([, d], { theme }) => ({ '--un-ring-width': theme.lineWidth?.[d] ?? h.cssvar.px(d) }), { autocomplete: 'ring-(width|size)-$lineWidth' }],
 
   // offset size
   ['ring-offset', { '--un-ring-offset-width': '1px' }],
-  [/^ring-offset-(?:width-|size-)?(.+)$/, ([, d], { theme }) => ({ '--un-ring-offset-width': theme.lineWidth?.[d] ?? h.bracket.cssvar.px(d) }), { autocomplete: 'ring-offset-(width|size)-$lineWidth' }],
+  [/^ring-offset-(?:width-|size-)?(.+)$/, ([, d], { theme }) => ({ '--un-ring-offset-width': theme.lineWidth?.[d] ?? h.cssvar.px(d) }), { autocomplete: 'ring-offset-(width|size)-$lineWidth' }],
 
   // colors
   [/^ring-(.+)$/, colorResolver('--un-ring-color', 'ring'), { autocomplete: 'ring-$colors' }],
-  [/^ring-op?(.+)$/, ([, opacity]) => ({ '--un-ring-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'ring-op-<percent>' }],
+  [/^ring-op?(.+)$/, ([, opacity]) => ({ '--un-ring-opacity': h.percent.cssvar(opacity) }), { autocomplete: 'ring-op-<percent>' }],
 
   // offset color
   [/^ring-offset-(.+)$/, colorResolver('--un-ring-offset-color', 'ring-offset'), { autocomplete: 'ring-offset-$colors' }],
-  [/^ring-offset-op-?(.+)$/, ([, opacity]) => ({ '--un-ring-offset-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'ring-offset-op-<percent>' }],
+  [/^ring-offset-op-?(.+)$/, ([, opacity]) => ({ '--un-ring-offset-opacity': h.percent.cssvar(opacity) }), { autocomplete: 'ring-offset-op-<percent>' }],
 
   // style
   ['ring-inset', { '--un-ring-inset': 'inset' }],

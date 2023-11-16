@@ -38,26 +38,26 @@ export const transitions: Rule<Theme>[] = [
   // timings
   [
     /^(?:transition-)?duration-(.+)$/,
-    ([, d], { theme }) => ({ 'transition-duration': theme.duration?.[d || 'DEFAULT'] ?? h.bracket.cssvar.time(d) }),
+    ([, d], { theme }) => ({ 'transition-duration': theme.duration?.[d || 'DEFAULT'] ?? h.cssvar.time(d) }),
     { autocomplete: ['transition-duration-$duration', 'duration-$duration'] },
   ],
 
   [
     /^(?:transition-)?delay-(.+)$/,
-    ([, d], { theme }) => ({ 'transition-delay': theme.duration?.[d || 'DEFAULT'] ?? h.bracket.cssvar.time(d) }),
+    ([, d], { theme }) => ({ 'transition-delay': theme.duration?.[d || 'DEFAULT'] ?? h.cssvar.time(d) }),
     { autocomplete: ['transition-delay-$duration', 'delay-$duration'] },
   ],
 
   [
     /^(?:transition-)?ease(?:-(.+))?$/,
-    ([, d], { theme }) => ({ 'transition-timing-function': theme.easing?.[d || 'DEFAULT'] ?? h.bracket.cssvar(d) }),
+    ([, d], { theme }) => ({ 'transition-timing-function': theme.easing?.[d || 'DEFAULT'] ?? h.cssvar(d) }),
     { autocomplete: ['transition-ease-(linear|in|out|in-out|DEFAULT)', 'ease-(linear|in|out|in-out|DEFAULT)'] },
   ],
 
   // props
   [
     /^(?:transition-)?property-(.+)$/,
-    ([, v]) => ({ 'transition-property': h.bracket.global(v) || transitionProperty(v) }),
+    ([, v]) => ({ 'transition-property': h.global(v) || transitionProperty(v) }),
     { autocomplete: [`transition-property-(${[...globalKeywords, ...Object.keys(transitionPropertyGroup)].join('|')})`] },
   ],
 

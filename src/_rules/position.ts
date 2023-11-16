@@ -44,7 +44,7 @@ export const justifies: StaticRule[] = [
 ]
 
 export const orders: Rule[] = [
-  [/^order-(.+)$/, ([, v]) => ({ order: h.bracket.cssvar.number(v) })],
+  [/^order-(.+)$/, ([, v]) => ({ order: h.cssvar.number(v) })],
   ['order-first', { order: '-9999' }],
   ['order-last', { order: '9999' }],
   ['order-none', { order: '0' }],
@@ -116,7 +116,7 @@ export const flexGridJustifiesAlignments = [...justifies, ...alignments]
   ])
 
 function handleInsetValue(v: string, { theme }: RuleContext<Theme>): string | number | undefined {
-  return theme.spacing?.[v] ?? h.bracket.cssvar.global.auto.fraction.rem(v)
+  return theme.spacing?.[v] ?? h.cssvar.global.auto.fraction.rem(v)
 }
 
 function handleInsetValues([, d, v]: string[], ctx: RuleContext): CSSEntries | undefined {
@@ -163,7 +163,7 @@ export const floats: Rule[] = [
 
 export const zIndexes: Rule[] = [
   [/^(?:position-|pos-)?z([\d.]+)$/, ([, v]) => ({ 'z-index': h.number(v) })],
-  [/^(?:position-|pos-)?z-(.+)$/, ([, v], { theme }: RuleContext<Theme>) => ({ 'z-index': theme.zIndex?.[v] ?? h.bracket.cssvar.global.auto.number(v) }), { autocomplete: 'z-<num>' }],
+  [/^(?:position-|pos-)?z-(.+)$/, ([, v], { theme }: RuleContext<Theme>) => ({ 'z-index': theme.zIndex?.[v] ?? h.cssvar.global.auto.number(v) }), { autocomplete: 'z-<num>' }],
 ]
 
 export const boxSizing: Rule[] = [

@@ -5,19 +5,19 @@ import { colorResolver, h } from '../utils'
 export const svgUtilities: Rule<Theme>[] = [
   // fills
   [/^fill-(.+)$/, colorResolver('fill', 'fill'), { autocomplete: 'fill-$colors' }],
-  [/^fill-op-?(.+)$/, ([, opacity]) => ({ '--un-fill-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'fill-op-<percent>' }],
+  [/^fill-op-?(.+)$/, ([, opacity]) => ({ '--un-fill-opacity': h.percent.cssvar(opacity) }), { autocomplete: 'fill-op-<percent>' }],
   ['fill-none', { fill: 'none' }],
 
   // stroke size
-  [/^stroke-(?:width-|size-)?(.+)$/, ([, s], { theme }) => ({ 'stroke-width': theme.lineWidth?.[s] ?? h.bracket.cssvar.fraction.px.number(s) }), { autocomplete: ['stroke-width-$lineWidth', 'stroke-size-$lineWidth'] }],
+  [/^stroke-(?:width-|size-)?(.+)$/, ([, s], { theme }) => ({ 'stroke-width': theme.lineWidth?.[s] ?? h.cssvar.fraction.px.number(s) }), { autocomplete: ['stroke-width-$lineWidth', 'stroke-size-$lineWidth'] }],
 
   // stroke dash
-  [/^stroke-dash-(.+)$/, ([, s]) => ({ 'stroke-dasharray': h.bracket.cssvar.number(s) }), { autocomplete: 'stroke-dash-<num>' }],
-  [/^stroke-offset-(.+)$/, ([, s], { theme }) => ({ 'stroke-dashoffset': theme.lineWidth?.[s] ?? h.bracket.cssvar.px.numberWithUnit(s) }), { autocomplete: 'stroke-offset-$lineWidth' }],
+  [/^stroke-dash-(.+)$/, ([, s]) => ({ 'stroke-dasharray': h.cssvar.number(s) }), { autocomplete: 'stroke-dash-<num>' }],
+  [/^stroke-offset-(.+)$/, ([, s], { theme }) => ({ 'stroke-dashoffset': theme.lineWidth?.[s] ?? h.cssvar.px.numberWithUnit(s) }), { autocomplete: 'stroke-offset-$lineWidth' }],
 
   // stroke colors
   [/^stroke-(.+)$/, colorResolver('stroke', 'stroke'), { autocomplete: 'stroke-$colors' }],
-  [/^stroke-op-?(.+)$/, ([, opacity]) => ({ '--un-stroke-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'stroke-op-<percent>' }],
+  [/^stroke-op-?(.+)$/, ([, opacity]) => ({ '--un-stroke-opacity': h.percent.cssvar(opacity) }), { autocomplete: 'stroke-op-<percent>' }],
 
   // line cap
   ['stroke-cap-square', { 'stroke-linecap': 'square' }],

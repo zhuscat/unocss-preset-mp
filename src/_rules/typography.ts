@@ -4,7 +4,7 @@ import type { Theme } from '../theme'
 import { colorResolver, colorableShadows, h } from '../utils'
 
 function handleThemeByKey(s: string, theme: Theme, key: 'lineHeight' | 'letterSpacing') {
-  return theme[key]?.[s] || h.bracket.cssvar.global.rem(s)
+  return theme[key]?.[s] || h.cssvar.global.rem(s)
 }
 
 export const fonts: Rule<Theme>[] = [
@@ -30,21 +30,21 @@ export const fonts: Rule<Theme>[] = [
         }
       }
 
-      return { 'font-size': h.bracketOfLength.rem(s) }
+      return { 'font-size': h.rem(s) }
     },
     { autocomplete: 'text-$fontSize' },
   ],
   [/^(?:text|font)-size-(.+)$/, ([, s], { theme }) => {
     const themed = toArray(theme.fontSize?.[s]) as [string, string | CSSObject]
-    const size = themed?.[0] ?? h.bracket.cssvar.global.rem(s)
+    const size = themed?.[0] ?? h.cssvar.global.rem(s)
     if (size != null)
       return { 'font-size': size }
   }, { autocomplete: 'text-size-$fontSize' }],
 
   // weights
   [
-    /^(?:fw)-?([^-]+)$/,
-    ([, s], { theme }) => ({ 'font-weight': theme.fontWeight?.[s] || h.bracket.global.number(s) }),
+    /^(?:fw)-([^-]+)$/,
+    ([, s], { theme }) => ({ 'font-weight': theme.fontWeight?.[s] || h.global.number(s) }),
     {
       autocomplete: [
         '(fw)-(100|200|300|400|500|600|700|800|900)',
@@ -65,33 +65,33 @@ export const fonts: Rule<Theme>[] = [
   ['font-synthesis-style', { 'font-synthesis': 'style' }],
   ['font-synthesis-small-caps', { 'font-synthesis': 'small-caps' }],
   ['font-synthesis-none', { 'font-synthesis': 'none' }],
-  [/^font-synthesis-(.+)$/, ([, s]) => ({ 'font-synthesis': h.bracket.cssvar.global(s) })],
+  [/^font-synthesis-(.+)$/, ([, s]) => ({ 'font-synthesis': h.cssvar.global(s) })],
 
   // tracking
   [
     /^(?:font-)?tracking-(.+)$/,
-    ([, s], { theme }) => ({ 'letter-spacing': theme.letterSpacing?.[s] || h.bracket.cssvar.global.rem(s) }),
+    ([, s], { theme }) => ({ 'letter-spacing': theme.letterSpacing?.[s] || h.cssvar.global.rem(s) }),
     { autocomplete: 'tracking-$letterSpacing' },
   ],
 
   // word-spacing
   [
     /^(?:font-)?word-spacing-(.+)$/,
-    ([, s], { theme }) => ({ 'word-spacing': theme.wordSpacing?.[s] || h.bracket.cssvar.global.rem(s) }),
+    ([, s], { theme }) => ({ 'word-spacing': theme.wordSpacing?.[s] || h.cssvar.global.rem(s) }),
     { autocomplete: 'word-spacing-$wordSpacing' },
   ],
 
   // family
   [
     /^font-(.+)$/,
-    ([, d], { theme }) => ({ 'font-family': theme.fontFamily?.[d] || h.bracket.cssvar.global(d) }),
+    ([, d], { theme }) => ({ 'font-family': theme.fontFamily?.[d] || h.cssvar.global(d) }),
     { autocomplete: 'font-$fontFamily' },
   ],
 ]
 
 export const tabSizes: Rule<Theme>[] = [
   [/^tab(?:-(.+))?$/, ([, s]) => {
-    const v = h.bracket.cssvar.global.number(s || '4')
+    const v = h.cssvar.global.number(s || '4')
     if (v != null) {
       return {
         '-moz-tab-size': v,
@@ -103,16 +103,16 @@ export const tabSizes: Rule<Theme>[] = [
 ]
 
 export const textIndents: Rule<Theme>[] = [
-  [/^indent(?:-(.+))?$/, ([, s], { theme }) => ({ 'text-indent': theme.textIndent?.[s || 'DEFAULT'] || h.bracket.cssvar.global.fraction.rem(s) }), { autocomplete: 'indent-$textIndent' }],
+  [/^indent(?:-(.+))?$/, ([, s], { theme }) => ({ 'text-indent': theme.textIndent?.[s || 'DEFAULT'] || h.cssvar.global.fraction.rem(s) }), { autocomplete: 'indent-$textIndent' }],
 ]
 
 export const textStrokes: Rule<Theme>[] = [
   // widths
-  [/^text-stroke(?:-(.+))?$/, ([, s], { theme }) => ({ '-webkit-text-stroke-width': theme.textStrokeWidth?.[s || 'DEFAULT'] || h.bracket.cssvar.px(s) }), { autocomplete: 'text-stroke-$textStrokeWidth' }],
+  [/^text-stroke(?:-(.+))?$/, ([, s], { theme }) => ({ '-webkit-text-stroke-width': theme.textStrokeWidth?.[s || 'DEFAULT'] || h.cssvar.px(s) }), { autocomplete: 'text-stroke-$textStrokeWidth' }],
 
   // colors
   [/^text-stroke-(.+)$/, colorResolver('-webkit-text-stroke-color', 'text-stroke'), { autocomplete: 'text-stroke-$colors' }],
-  [/^text-stroke-op-?(.+)$/, ([, opacity]) => ({ '--un-text-stroke-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'text-stroke-op-<percent>' }],
+  [/^text-stroke-op-?(.+)$/, ([, opacity]) => ({ '--un-text-stroke-opacity': h.percent.cssvar(opacity) }), { autocomplete: 'text-stroke-op-<percent>' }],
 ]
 
 export const textShadows: Rule<Theme>[] = [
@@ -124,10 +124,10 @@ export const textShadows: Rule<Theme>[] = [
         'text-shadow': 'var(--un-text-shadow)',
       }
     }
-    return { 'text-shadow': h.bracket.cssvar.global(s) }
+    return { 'text-shadow': h.cssvar.global(s) }
   }, { autocomplete: 'text-shadow-$textShadow' }],
 
   // colors
   [/^text-shadow-color-(.+)$/, colorResolver('--un-text-shadow-color', 'text-shadow'), { autocomplete: 'text-shadow-color-$colors' }],
-  [/^text-shadow-color-op-?(.+)$/, ([, opacity]) => ({ '--un-text-shadow-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'text-shadow-color-op-<percent>' }],
+  [/^text-shadow-color-op-?(.+)$/, ([, opacity]) => ({ '--un-text-shadow-opacity': h.percent.cssvar(opacity) }), { autocomplete: 'text-shadow-color-op-<percent>' }],
 ]

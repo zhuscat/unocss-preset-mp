@@ -4,13 +4,13 @@ import { colorResolver, globalKeywords, h } from '../utils'
 
 export const outline: Rule<Theme>[] = [
   // size
-  [/^outline-(?:width-|size-)?(.+)$/, ([, d], { theme }) => ({ 'outline-width': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d) }), { autocomplete: 'outline-(width|size)-<num>' }],
+  [/^outline-(?:width-|size-)?(.+)$/, ([, d], { theme }) => ({ 'outline-width': theme.lineWidth?.[d] ?? h.cssvar.global.px(d) }), { autocomplete: 'outline-(width|size)-<num>' }],
 
   // color
   [/^outline-(?:color-)?(.+)$/, colorResolver('outline-color', 'outline-color'), { autocomplete: 'outline-$colors' }],
 
   // offset
-  [/^outline-offset-(.+)$/, ([, d], { theme }) => ({ 'outline-offset': theme.lineWidth?.[d] ?? h.bracket.cssvar.global.px(d) }), { autocomplete: 'outline-(offset)-<num>' }],
+  [/^outline-offset-(.+)$/, ([, d], { theme }) => ({ 'outline-offset': theme.lineWidth?.[d] ?? h.cssvar.global.px(d) }), { autocomplete: 'outline-(offset)-<num>' }],
 
   // style
   ['outline', { 'outline-style': 'solid' }],

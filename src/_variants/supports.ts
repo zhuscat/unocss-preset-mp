@@ -9,9 +9,7 @@ export const variantSupports: VariantObject = {
     if (variant) {
       const [match, rest] = variant
 
-      let supports = h.bracket(match) ?? ''
-      if (supports === '')
-        supports = ctx.theme.supports?.[match] ?? ''
+      const supports = ctx.theme.supports?.[match] ?? ''
 
       if (supports) {
         return {

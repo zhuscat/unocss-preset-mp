@@ -20,7 +20,7 @@ function autoDirection(c: string, theme: Theme, prop: string) {
     case 'fr': return 'minmax(0,1fr)'
   }
 
-  return h.bracket.cssvar.auto.rem(prop)
+  return h.cssvar.auto.rem(prop)
 }
 
 export const grids: Rule<Theme>[] = [
@@ -30,33 +30,33 @@ export const grids: Rule<Theme>[] = [
 
   // global
   [/^(?:grid-)?(row|col)-(.+)$/, ([, c, v], { theme }) => ({
-    [`grid-${rowCol(c)}`]: theme[`grid${rowColTheme(c)}`]?.[v] ?? h.bracket.cssvar.auto(v),
+    [`grid-${rowCol(c)}`]: theme[`grid${rowColTheme(c)}`]?.[v] ?? h.cssvar.auto(v),
   })],
 
   // span
   [/^(?:grid-)?(row|col)-span-(.+)$/, ([, c, s]) => {
     if (s === 'full')
       return { [`grid-${rowCol(c)}`]: '1/-1' }
-    const v = h.bracket.number(s)
+    const v = h.number(s)
     if (v != null)
       return { [`grid-${rowCol(c)}`]: `span ${v}/span ${v}` }
   }, { autocomplete: ['grid-(row|col)-span-<num>', '(row|col)-span-<num>'] }],
 
   // starts & ends
-  [/^(?:grid-)?(row|col)-start-(.+)$/, ([, c, v]) => ({ [`grid-${rowCol(c)}-start`]: h.bracket.cssvar(v) ?? v })],
-  [/^(?:grid-)?(row|col)-end-(.+)$/, ([, c, v]) => ({ [`grid-${rowCol(c)}-end`]: h.bracket.cssvar(v) ?? v }), { autocomplete: ['grid-(row|col)-(start|end)-<num>'] }],
+  [/^(?:grid-)?(row|col)-start-(.+)$/, ([, c, v]) => ({ [`grid-${rowCol(c)}-start`]: h.cssvar(v) ?? v })],
+  [/^(?:grid-)?(row|col)-end-(.+)$/, ([, c, v]) => ({ [`grid-${rowCol(c)}-end`]: h.cssvar(v) ?? v }), { autocomplete: ['grid-(row|col)-(start|end)-<num>'] }],
 
   // auto flows
   [/^(?:grid-)?auto-(rows|cols)-(.+)$/, ([, c, v], { theme }) => ({ [`grid-auto-${rowCol(c)}`]: autoDirection(c, theme, v) }), { autocomplete: ['grid-auto-(rows|cols)-<num>'] }],
 
   // grid-auto-flow, auto-flow: uno
   // grid-flow: wind
-  [/^(?:grid-auto-flow|auto-flow|grid-flow)-(.+)$/, ([, v]) => ({ 'grid-auto-flow': h.bracket.cssvar(v) })],
+  [/^(?:grid-auto-flow|auto-flow|grid-flow)-(.+)$/, ([, v]) => ({ 'grid-auto-flow': h.cssvar(v) })],
   [/^(?:grid-auto-flow|auto-flow|grid-flow)-(row|col|dense|row-dense|col-dense)$/, ([, v]) => ({ 'grid-auto-flow': rowCol(v).replace('-', ' ') }), { autocomplete: ['(grid-auto-flow|auto-flow|grid-flow)-(row|col|dense|row-dense|col-dense)'] }],
 
   // templates
   [/^grid-(rows|cols)-(.+)$/, ([, c, v], { theme }) => ({
-    [`grid-template-${rowCol(c)}`]: theme[`gridTemplate${rowColTheme(c)}`]?.[v] ?? h.bracket.cssvar(v),
+    [`grid-template-${rowCol(c)}`]: theme[`gridTemplate${rowColTheme(c)}`]?.[v] ?? h.cssvar(v),
   })],
   [/^grid-(rows|cols)-minmax-([\w.-]+)$/, ([, c, d]) => ({ [`grid-template-${rowCol(c)}`]: `repeat(auto-fill,minmax(${d},1fr))` })],
   [/^grid-(rows|cols)-(\d+)$/, ([, c, d]) => ({ [`grid-template-${rowCol(c)}`]: `repeat(${d},minmax(0,1fr))` }), { autocomplete: ['grid-(rows|cols)-<num>', 'grid-(rows|cols)-none'] }],
@@ -64,8 +64,8 @@ export const grids: Rule<Theme>[] = [
   // areas
   [/^grid-area(s)?-(.+)$/, ([, s, v]) => {
     if (s != null)
-      return { 'grid-template-areas': h.cssvar(v) ?? v.split('-').map(s => `"${h.bracket(s)}"`).join(' ') }
-    return { 'grid-area': h.bracket.cssvar(v) }
+      return
+    return { 'grid-area': h.cssvar(v) }
   }],
 
   // template none

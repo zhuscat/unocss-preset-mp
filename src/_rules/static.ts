@@ -15,7 +15,7 @@ export const displays: Rule[] = [
   ['flow-root', { display: 'flow-root' }],
   ['list-item', { display: 'list-item' }],
   ['hidden', { display: 'none' }],
-  [/^display-(.+)$/, ([, c]) => ({ display: h.bracket.cssvar.global(c) })],
+  [/^display-(.+)$/, ([, c]) => ({ display: h.cssvar.global(c) })],
 ]
 
 export const appearances: Rule[] = [
@@ -27,18 +27,12 @@ export const appearances: Rule[] = [
 ]
 
 export const cursors: Rule[] = [
-  [/^cursor-(.+)$/, ([, c]) => ({ cursor: h.bracket.cssvar.global(c) })],
+  [/^cursor-(.+)$/, ([, c]) => ({ cursor: h.cssvar.global(c) })],
   ...cursorValues.map((v): Rule => [`cursor-${v}`, { cursor: v }]),
 ]
 
 export const contains: Rule[] = [
   [/^contain-(.*)$/, ([, d]) => {
-    if (h.bracket(d) != null) {
-      return {
-        contain: h.bracket(d)!.split(' ').map(e => h.cssvar.fraction(e) ?? e).join(' '),
-      }
-    }
-
     return containValues.includes(d) ? { contain: d } : undefined
   }],
 ]
@@ -74,7 +68,7 @@ export const whitespaces: Rule[] = [
 ]
 
 export const contentVisibility: Rule[] = [
-  [/^intrinsic-size-(.+)$/, ([, d]) => ({ 'contain-intrinsic-size': h.bracket.cssvar.global.fraction.rem(d) }), { autocomplete: 'intrinsic-size-<num>' }],
+  [/^intrinsic-size-(.+)$/, ([, d]) => ({ 'contain-intrinsic-size': h.cssvar.global.fraction.rem(d) }), { autocomplete: 'intrinsic-size-<num>' }],
   ['content-visibility-visible', { 'content-visibility': 'visible' }],
   ['content-visibility-hidden', { 'content-visibility': 'hidden' }],
   ['content-visibility-auto', { 'content-visibility': 'auto' }],
@@ -82,7 +76,7 @@ export const contentVisibility: Rule[] = [
 ]
 
 export const contents: Rule[] = [
-  [/^content-(.+)$/, ([, v]) => ({ content: h.bracket.cssvar(v) })],
+  [/^content-(.+)$/, ([, v]) => ({ content: h.cssvar(v) })],
   ['content-empty', { content: '""' }],
   ['content-none', { content: 'none' }],
 ]

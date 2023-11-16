@@ -9,7 +9,7 @@ const directions: Record<string, string> = {
 }
 
 function handleGap([, d = '', s]: string[], { theme }: RuleContext<Theme>) {
-  const v = theme.spacing?.[s] ?? h.bracket.cssvar.global.rem(s)
+  const v = theme.spacing?.[s] ?? h.cssvar.global.rem(s)
   if (v != null) {
     return {
       [`${directions[d]}gap`]: v,

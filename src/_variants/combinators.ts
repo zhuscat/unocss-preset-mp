@@ -21,9 +21,7 @@ function scopeMatcher(name: string, combinator: string): VariantObject {
           return
       }
 
-      let bracketValue = h.bracket(body[0]) ?? ''
-      if (bracketValue === '')
-        bracketValue = '*'
+      let bracketValue = '*'
 
       return {
         matcher: body[1],

@@ -16,7 +16,7 @@ export const boxShadows: Rule<Theme>[] = [
     const [, d] = match
     const { theme } = context
     const v = theme.boxShadow?.[d || 'DEFAULT']
-    const c = d ? h.bracket.cssvar(d) : undefined
+    const c = d ? h.cssvar(d) : undefined
 
     if ((v != null || c != null) && !hasParseableColor(c, theme)) {
       return {
@@ -26,7 +26,7 @@ export const boxShadows: Rule<Theme>[] = [
     }
     return colorResolver('--un-shadow-color', 'shadow')(match, context)
   }, { autocomplete: ['shadow-$colors', 'shadow-$boxShadow'] }],
-  [/^shadow-op-?(.+)$/, ([, opacity]) => ({ '--un-shadow-opacity': h.bracket.percent.cssvar(opacity) }), { autocomplete: 'shadow-op-<percent>' }],
+  [/^shadow-op-?(.+)$/, ([, opacity]) => ({ '--un-shadow-opacity': h.percent.cssvar(opacity) }), { autocomplete: 'shadow-op-<percent>' }],
 
   // inset
   ['shadow-inset', { '--un-shadow-inset': 'inset' }],
