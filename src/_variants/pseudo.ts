@@ -82,10 +82,10 @@ const PseudoClassesColon: Record<string, string> = Object.fromEntries([
 const PseudoClassesColonKeys = Object.keys(PseudoClassesColon)
 
 const PseudoClassFunctions = [
-  'not',
-  'is',
+  // 'not',
+  // 'is',
   'where',
-  'has',
+  // 'has',
 ]
 
 const PseudoClassesStr = Object.entries(PseudoClasses)
