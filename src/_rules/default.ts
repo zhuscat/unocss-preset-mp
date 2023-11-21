@@ -22,6 +22,7 @@ import { appearance, outline, willChange } from './behaviors'
 import { textDecorations } from './decoration'
 import { svgUtilities } from './svg'
 import { containerParent } from './container'
+import { lineClamps } from './line-clamp'
 
 export const rules: Rule<Theme>[] = [
   cssVariables,
@@ -82,6 +83,7 @@ export const rules: Rule<Theme>[] = [
   containerParent,
   contains,
   textWraps,
+  lineClamps,
 
   // should be the last
   questionMark,
