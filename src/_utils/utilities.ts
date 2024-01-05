@@ -112,7 +112,8 @@ export function parseColor(body: string, theme: Theme): ParsedColorValue | undef
         colorData = getThemeColor(theme, [name])
       }
       if (typeof colorData === 'string')
-        color = colorData
+        // color = colorData
+        return
       else if (no && colorData)
         color = colorData[no] as string
     }
